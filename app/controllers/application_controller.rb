@@ -1,11 +1,14 @@
 class ApplicationController < ActionController::API
+  include ApiExceptionHandler
+  include ApiResponse
   before_action :authorize!
+  before_action :set_paper_trail_whodunnit
 
   private
 
   def current_user
     user_id = JwtAuthenticationService.decode_token(request)
-    @user = User.find_by(id: user_id)
+    @user = User.non_deleted.unarchived.find_by(id: user_id)
   end
 
   def logged_in?

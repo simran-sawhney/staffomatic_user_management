@@ -21,6 +21,9 @@ gem 'jwt'
 
 # seriaization & json_api logic
 gem 'jsonapi.rb'
+gem 'paper_trail'
+
+
 
 
 group :development, :test do
